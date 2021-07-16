@@ -1,0 +1,9 @@
+7/11/21
+Next-auth providers is really quick and easy to set up
+
+7/13/21
+struggled to handle json web tokens and to pass authtoken back to graphql context
+
+7/15/21
+found out about next/img and image optimization which is lazy loaded
+passing data between pages - localstorage does not work due to SSR constraints
