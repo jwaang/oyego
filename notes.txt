@@ -7,3 +7,19 @@ struggled to handle json web tokens and to pass authtoken back to graphql contex
 7/15/21
 found out about next/img and image optimization which is lazy loaded
 passing data between pages - localstorage does not work due to SSR constraints
+
+7/17/21
+created custom signin page provider
+create review modal + mutation
+wasted some more time thinking i had to create users in the db
+linked users email to review
+
+7/18/21
+adding a parameter for a query or mutation requires a lot of changes
+graphql errors are sometimes hard to debug took me forever to realize i had an incomplete gql statement
+converted a long parameters to input type in schema
+added user page and loads all user reviews and created ReviewCard
+added edit and delete functionality to reviews
+
+TODO
+after deleting/editing reviews, page should update as well

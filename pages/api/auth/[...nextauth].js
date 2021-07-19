@@ -4,6 +4,9 @@ import jwt from "jsonwebtoken";
 const config = require("@/server/config");
 
 const options = {
+  pages: {
+    signIn: "/signin",
+  },
   providers: [
     Providers.Spotify({
       id: "spotify",
@@ -54,34 +57,15 @@ const options = {
     },
   },
   callbacks: {
-    // async session(session, token) {
-    //   const encodedToken = jwt.sign(token, config.JWT_SECRET, { algorithm: "HS256" });
-    //   console.log("5 callback session encodedToken", encodedToken);
-    //   session.id = token.id;
-    //   session.token = encodedToken;
-    //   return Promise.resolve(session);
-    // },
-    // async jwt(token, user, account, profile, isNewUser) {
-    //   const isUserSignedIn = user ? true : false;
-    //   console.log("1 4 callback jwt user", user);
-    //   if (isUserSignedIn) {
-    //     token.id = user.id.toString();
-    //   }
-    //   return Promise.resolve(token);
-    // },
     async jwt(token, _, account) {
       if (account) {
         token.id = account.id;
         token.accessToken = account.accessToken;
-        // console.log("TOKEN", token);
-        // console.log("test", buildAuthContext(req).getToken(token));
       }
-      // localStorage.setItem("authToken", accessToken);
       return token;
     },
     async session(session, user) {
       session.user = user;
-      // console.log("SESSION", session);
       return session;
     },
   },

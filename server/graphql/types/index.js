@@ -1,4 +1,10 @@
 exports.ablumSearchTypes = `
+  input AlbumSearchInput {
+    artist: String
+    accessToken: String
+    limit: String
+  }
+
   type AlbumSearch {
     albums: Albums
   }
@@ -45,5 +51,37 @@ exports.ablumSearchTypes = `
     height: Int
     url: String
     width: Int
+  }
+`;
+
+exports.reviewType = `
+  type Review {
+    _id: ID
+    image: String!
+    album: String!
+    artist: String!
+    rating: Float!
+    review: String!
+    email: String!
+    name: String!
+    user_image: String!
+    sub: String!
+  }
+
+  input CreateReviewInput {
+    artist: String
+    album: String
+    image: String
+    rating: Float
+    review: String
+    email: String
+    name: String
+    user_image: String
+    sub: String
+  }
+
+  input EditReviewInput {
+    rating: Float
+    review: String
   }
 `;

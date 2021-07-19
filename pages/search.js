@@ -2,7 +2,7 @@ import { useSession, getSession } from "next-auth/client";
 import withApollo from "@/hoc/withApollo";
 import { useState } from "react";
 import { SearchAlbumsQuery } from "@/apollo/actions";
-import Card from "@/components/shared/Card";
+import SearchCard from "@/components/shared/SearchCard";
 
 const Search = () => {
   const [session, loading] = useSession();
@@ -42,7 +42,7 @@ const Search = () => {
 
         {data && data.searchAlbums && data.searchAlbums.albums && data.searchAlbums.albums.items
           ? data.searchAlbums.albums.items.map((album) => (
-              <Card key={album.id} id={album.id} image={album.images[0].url} album={album.name} artist={album.artists[0].name} />
+              <SearchCard key={album.id} id={album.id} image={album.images[0].url} album={album.name} artist={album.artists[0].name} />
             ))
           : null}
       </>
