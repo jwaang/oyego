@@ -5,6 +5,7 @@ import { useSession } from "next-auth/client";
 import Image from "next/image";
 import ReactStars from "react-rating-stars-component";
 import { CreateReviewMutation } from "@/apollo/actions";
+import withApollo from "@/hoc/withApollo";
 
 const CreateReview = ({ open, onClose, albumVariables }) => {
   const [rating, setRating] = useState(0);
@@ -46,7 +47,7 @@ const CreateReview = ({ open, onClose, albumVariables }) => {
     </>
   );
 };
-export default CreateReview;
+export default withApollo(CreateReview);
 
 const Wrapper = styled.div``;
 

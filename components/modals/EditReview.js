@@ -1,14 +1,15 @@
 import styled from "styled-components";
 import { Modal } from "react-responsive-modal";
 import { useState } from "react";
-import { useSession } from "next-auth/client";
 import Image from "next/image";
-import ReactStars from "react-rating-stars-component";
 import { EditReviewMutation } from "@/apollo/actions";
+import { GET_ALL_REVIEWS_BY_SUB_QUERY } from "@/apollo/queries";
+import withApollo from "@/hoc/withApollo";
+import ReactStars from "react-stars";
+import { Star } from "react-star";
 
-const EditReview = ({ open, onClose, id, image, album, rating: currentRating, artist, review }) => {
+const EditReview = ({ open, onClose, id, sub, image, album, rating: currentRating, artist, review }) => {
   const [rating, setRating] = useState(currentRating);
-  const [session, loading] = useSession();
   const [textAreaVal, setTextAreaVal] = useState(review);
   const [editReview, { loading: editLoading, data }] = EditReviewMutation();
 
@@ -18,7 +19,8 @@ const EditReview = ({ open, onClose, id, image, album, rating: currentRating, ar
       review: textAreaVal,
       rating,
     };
-    editReview({ variables: editObject });
+    editReview({ refetchQueries: [{ query: GET_ALL_REVIEWS_BY_SUB_QUERY, variables: { sub } }], variables: editObject });
+    onClose(false);
   };
 
   return (
@@ -30,14 +32,15 @@ const EditReview = ({ open, onClose, id, image, album, rating: currentRating, ar
           <AlbumSpan>{album}</AlbumSpan>
           <ArtistSpan>{artist}</ArtistSpan>
           <AddReviewTextArea rows="4" cols="50" value={textAreaVal} onChange={(e) => setTextAreaVal(e.target.value)}></AddReviewTextArea>
-          <ReactStars count={5} value={rating} isHalf={true} onChange={(newRating) => setRating(newRating)} size={24} activeColor="#A7E961" />
+          {/* <ReactStars count={5} value={rating} half={true} size={20} onChange={(newRating) => setRating(newRating)} color2="#A7E961" /> */}
+          <Star defaultValue={rating} onChange={(newRating) => setRating(newRating)} fraction={2} />
           <SaveButton onClick={() => handleEdit()}>Edit</SaveButton>
         </Wrapper>
       </Modal>
     </>
   );
 };
-export default EditReview;
+export default withApollo(EditReview);
 
 const Wrapper = styled.div``;
 

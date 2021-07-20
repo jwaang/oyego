@@ -21,5 +21,11 @@ converted a long parameters to input type in schema
 added user page and loads all user reviews and created ReviewCard
 added edit and delete functionality to reviews
 
-TODO
-after deleting/editing reviews, page should update as well
+7/19/21
+updating cache is interesting. learned about refetchQueries, InMemoryCache, etc.
+styled-components was causing a mismatch between server side and client side classnames, so i updated babel config to resolve this issue.
+had to use a different star rating package since it wasn't being updated after editing
+went through like 5 star rating packages to find one that was able to update after edit and handle half stars
+finished updating cache after delete and edit mutations 
+improved sign in flow - removed extra sign in button step
+only self users can edit and delete their own reviews

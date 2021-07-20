@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { GetAllReviewsBySubQuery } from "@/apollo/actions";
 import { useRouter } from "next/router";
 import ReviewCard from "@/components/shared/ReviewCard";
+import { getDataFromTree } from "@apollo/react-ssr";
 
 const User = () => {
   const router = useRouter();
@@ -18,6 +19,7 @@ const User = () => {
           <ReviewCard
             key={review._id}
             id={review._id}
+            sub={sub}
             image={review.image}
             album={review.album}
             artist={review.artist}
@@ -31,7 +33,7 @@ const User = () => {
   );
 };
 
-export default withApollo(User);
+export default withApollo(User, { getDataFromTree });
 
 // to be used on page redirect to own profile page
 // export async function getServerSideProps(context) {
@@ -41,5 +43,3 @@ export default withApollo(User);
 //     },
 //   };
 // }
-
-const Wrapper = styled.div``;

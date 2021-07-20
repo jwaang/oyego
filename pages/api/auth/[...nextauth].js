@@ -4,9 +4,6 @@ import jwt from "jsonwebtoken";
 const config = require("@/server/config");
 
 const options = {
-  pages: {
-    signIn: "/signin",
-  },
   providers: [
     Providers.Spotify({
       id: "spotify",

@@ -14,7 +14,20 @@ export default withApollo(
         });
       },
       uri: config.BASE_URL,
-      cache: new InMemoryCache().restore(initialState || {}),
+      cache: new InMemoryCache({
+        typePolicies: {
+          Query: {
+            fields: {
+              getAllReviewsBySub: {
+                merge(existing, incoming) {
+                  // use only incoming array
+                  return incoming;
+                },
+              },
+            },
+          },
+        },
+      }).restore(initialState || {}),
     });
   },
   {
