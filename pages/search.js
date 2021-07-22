@@ -2,7 +2,8 @@ import { useSession, getSession } from "next-auth/client";
 import withApollo from "@/hoc/withApollo";
 import { useState } from "react";
 import { SearchAlbumsQuery } from "@/apollo/actions";
-import SearchCard from "@/components/shared/SearchCard";
+import SearchCard from "@/components/cards/SearchCard";
+import Redirect from "@/components/shared/Redirect";
 
 const Search = () => {
   const [session, loading] = useSession();
@@ -47,8 +48,9 @@ const Search = () => {
           : null}
       </>
     );
+  } else {
+    return <Redirect to="/" query={{ message: "NOT_AUTHENTICATED" }} />;
   }
-  return <p>Access Denied ❌</p>;
 };
 export default withApollo(Search);
 

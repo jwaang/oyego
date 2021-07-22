@@ -29,3 +29,11 @@ went through like 5 star rating packages to find one that was able to update aft
 finished updating cache after delete and edit mutations 
 improved sign in flow - removed extra sign in button step
 only self users can edit and delete their own reviews
+
+7/20/21
+protecting routes with redirect
+starting styling changes now
+
+7/22/21
+added bg waves and glassmorphism to login page 
+after login, redirects user to /home page instead of login 

@@ -1,45 +1,45 @@
 import withApollo from "@/hoc/withApollo";
 import styled from "styled-components";
-// import { useSession, getSession } from "next-auth/client";
+import { useSession } from "next-auth/client";
 import { GetAllReviewsBySubQuery } from "@/apollo/actions";
 import { useRouter } from "next/router";
-import ReviewCard from "@/components/shared/ReviewCard";
+import ReviewCard from "@/components/cards/ReviewCard";
 import { getDataFromTree } from "@apollo/react-ssr";
+import Redirect from "@/components/shared/Redirect";
 
 const User = () => {
   const router = useRouter();
-  // const [session, loading] = useSession();
+  const [session, loading] = useSession();
   const { sub } = router.query;
   const { data } = GetAllReviewsBySubQuery({ variables: { sub } });
 
-  return (
-    <>
-      {data &&
-        data.getAllReviewsBySub.map((review) => (
-          <ReviewCard
-            key={review._id}
-            id={review._id}
-            sub={sub}
-            image={review.image}
-            album={review.album}
-            artist={review.artist}
-            name={review.name}
-            review={review.review}
-            rating={review.rating}
-            user_image={review.user_image}
-          />
-        ))}
-    </>
-  );
+  if (loading) return <p>Loading Search Page</p>;
+
+  if (typeof window !== "undefined" && loading) return null;
+
+  if (session) {
+    return (
+      <>
+        {data &&
+          data.getAllReviewsBySub.map((review) => (
+            <ReviewCard
+              key={review._id}
+              id={review._id}
+              sub={sub}
+              image={review.image}
+              album={review.album}
+              artist={review.artist}
+              name={review.name}
+              review={review.review}
+              rating={review.rating}
+              user_image={review.user_image}
+            />
+          ))}
+      </>
+    );
+  } else {
+    return <Redirect to="/" query={{ message: "NOT_AUTHENTICATED" }} />;
+  }
 };
 
 export default withApollo(User, { getDataFromTree });
-
-// to be used on page redirect to own profile page
-// export async function getServerSideProps(context) {
-//   return {
-//     props: {
-//       session: await getSession(context),
-//     },
-//   };
-// }

@@ -6,15 +6,14 @@ import { getSession, providers, signIn, signOut, useSession } from "next-auth/cl
 import React from "react";
 import styled from "styled-components";
 import LoginCard from "@/components/cards/LoginCard";
-import Redirect from "@/components/shared/Redirect";
 
-const Login = () => {
+const Home = () => {
   const [session, loading] = useSession();
   const { data } = GetAllReviewsQuery();
 
   return (
     <>
-      {/* {session && (
+      {session && (
         <>
           {data &&
             data.getAllReviews.map((review) => (
@@ -32,18 +31,14 @@ const Login = () => {
             ))}
           <button onClick={signOut}>Sign out</button>
         </>
-      )} */}
-      {/* {session && <Redirect to={"/home"} />} */}
-      <Wrapper>
-        <LoginCard session={session} />
-      </Wrapper>
+      )}
     </>
   );
 };
 
-export default withApollo(Login);
+export default withApollo(Home);
 
-Login.getInitialProps = async (context) => {
+Home.getInitialProps = async (context) => {
   const { req, res } = context;
   const session = await getSession({ req });
   if (session && res && session.user.accessToken) {

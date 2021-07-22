@@ -23,6 +23,7 @@ export const GET_ALL_REVIEWS_QUERY = gql`
   query GetAllReviews {
     getAllReviews {
       _id
+      sub
       image
       album
       artist

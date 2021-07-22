@@ -65,6 +65,9 @@ const options = {
       session.user = user;
       return session;
     },
+    redirect: async (url, baseUrl) => {
+      return Promise.resolve("http://localhost:3000/home");
+    },
   },
 };
 

@@ -1,6 +1,7 @@
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import withApollo from "next-with-apollo";
 import config from "@/server/config";
+import WaveBackground from "@/components/backgrounds/WaveBackground";
 
 export default withApollo(
   ({ initialState, headers }) => {
@@ -34,6 +35,7 @@ export default withApollo(
     render: function withApolloRender({ Page, props }) {
       return (
         <ApolloProvider client={props.apollo}>
+          <WaveBackground />
           <Page {...props} />
         </ApolloProvider>
       );
