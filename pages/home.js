@@ -1,11 +1,9 @@
 import { GetAllReviewsQuery } from "@/apollo/actions";
 import ReviewCard from "@/components/cards/ReviewCard";
 import withApollo from "@/hoc/withApollo";
-import { getSession, providers, signIn, signOut, useSession } from "next-auth/client";
-
+import { getSession, providers, signOut, useSession } from "next-auth/client";
 import React from "react";
 import styled from "styled-components";
-import LoginCard from "@/components/cards/LoginCard";
 
 const Home = () => {
   const [session, loading] = useSession();
@@ -14,23 +12,25 @@ const Home = () => {
   return (
     <>
       {session && (
-        <>
+        <HomeWrapper>
           {data &&
             data.getAllReviews.map((review) => (
-              <ReviewCard
-                key={review._id}
-                sub={review.sub}
-                image={review.image}
-                album={review.album}
-                artist={review.artist}
-                name={review.name}
-                review={review.review}
-                rating={review.rating}
-                user_image={review.user_image}
-              />
+              <ReviewCardWrapper key={review._id}>
+                <ReviewCard
+                  sub={review.sub}
+                  image={review.image}
+                  album={review.album}
+                  artist={review.artist}
+                  name={review.name}
+                  review={review.review}
+                  rating={review.rating}
+                  user_image={review.user_image}
+                  lastUpdated={review.lastUpdated}
+                />
+              </ReviewCardWrapper>
             ))}
           <button onClick={signOut}>Sign out</button>
-        </>
+        </HomeWrapper>
       )}
     </>
   );
@@ -55,11 +55,14 @@ Home.getInitialProps = async (context) => {
   };
 };
 
-const Wrapper = styled.div`
+const HomeWrapper = styled.div`
   height: 100vh;
-  text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  ${"" /* justify-content: center; */}
+`;
+
+const ReviewCardWrapper = styled.div`
+  margin-bottom: 15px;
 `;

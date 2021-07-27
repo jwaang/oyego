@@ -66,6 +66,7 @@ exports.reviewType = `
     name: String!
     user_image: String!
     sub: String!
+    lastUpdated: String!
   }
 
   input CreateReviewInput {

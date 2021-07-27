@@ -1,12 +1,10 @@
-import styled from "styled-components";
-import { Modal } from "react-responsive-modal";
-import { useState } from "react";
-import Image from "next/image";
 import { EditReviewMutation } from "@/apollo/actions";
 import { GET_ALL_REVIEWS_BY_SUB_QUERY } from "@/apollo/queries";
-import withApollo from "@/hoc/withApollo";
-import ReactStars from "react-stars";
+import Image from "next/image";
+import { useState } from "react";
+import { Modal } from "react-responsive-modal";
 import { Star } from "react-star";
+import styled from "styled-components";
 
 const EditReview = ({ open, onClose, id, sub, image, album, rating: currentRating, artist, review }) => {
   const [rating, setRating] = useState(currentRating);
@@ -40,7 +38,7 @@ const EditReview = ({ open, onClose, id, sub, image, album, rating: currentRatin
     </>
   );
 };
-export default withApollo(EditReview);
+export default EditReview;
 
 const Wrapper = styled.div``;
 

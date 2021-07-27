@@ -32,6 +32,7 @@ export const GET_ALL_REVIEWS_QUERY = gql`
       email
       name
       user_image
+      lastUpdated
     }
   }
 `;

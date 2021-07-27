@@ -37,3 +37,11 @@ starting styling changes now
 7/22/21
 added bg waves and glassmorphism to login page 
 after login, redirects user to /home page instead of login 
+
+7/26/21
+added A LOT of styling to the home page 
+clicking on name redirects to users profile page 
+added show more / show less for long reviews
+added the date for when the review was created 
+button is a reusable component with different variants
+problem: we store the users profile pic in db but the image url expires...

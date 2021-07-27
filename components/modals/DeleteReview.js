@@ -43,7 +43,7 @@ const DeleteReview = ({ id, sub, open, onClose }) => {
     </>
   );
 };
-export default withApollo(DeleteReview, { getDataFromTree });
+export default DeleteReview;
 
 const Wrapper = styled.div``;
 

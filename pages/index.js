@@ -1,12 +1,9 @@
 import { GetAllReviewsQuery } from "@/apollo/actions";
-import ReviewCard from "@/components/cards/ReviewCard";
+import LoginCard from "@/components/cards/LoginCard";
 import withApollo from "@/hoc/withApollo";
-import { getSession, providers, signIn, signOut, useSession } from "next-auth/client";
-
+import { getSession, providers, useSession } from "next-auth/client";
 import React from "react";
 import styled from "styled-components";
-import LoginCard from "@/components/cards/LoginCard";
-import Redirect from "@/components/shared/Redirect";
 
 const Login = () => {
   const [session, loading] = useSession();
@@ -14,26 +11,6 @@ const Login = () => {
 
   return (
     <>
-      {/* {session && (
-        <>
-          {data &&
-            data.getAllReviews.map((review) => (
-              <ReviewCard
-                key={review._id}
-                sub={review.sub}
-                image={review.image}
-                album={review.album}
-                artist={review.artist}
-                name={review.name}
-                review={review.review}
-                rating={review.rating}
-                user_image={review.user_image}
-              />
-            ))}
-          <button onClick={signOut}>Sign out</button>
-        </>
-      )} */}
-      {/* {session && <Redirect to={"/home"} />} */}
       <Wrapper>
         <LoginCard session={session} />
       </Wrapper>
