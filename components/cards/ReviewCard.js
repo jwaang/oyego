@@ -44,7 +44,7 @@ const ReviewCard = ({ id, sub, image, album, artist, name, review, rating, user_
         review={review}
         rating={rating}
       />
-      <DeleteReview onClose={() => setShowDeleteModal(false)} open={showDeleteModal} id={id} sub={sub} />
+      <DeleteReview onClose={() => setShowDeleteModal(false)} open={showDeleteModal} id={id} sub={sub} album={album} artist={artist} />
       <CardWrapper>
         <CardSideWrapper>
           <AlbumCoverWrapper>
@@ -52,8 +52,8 @@ const ReviewCard = ({ id, sub, image, album, artist, name, review, rating, user_
           </AlbumCoverWrapper>
           {session && session.user.sub === sub && (
             <ReviewButtonsWrapper>
-              <Button onClickFunction={() => updateVariablesAndShowModal()} text="Edit" type="primary" size="compact" />
-              <Button onClickFunction={() => setShowDeleteModal(true)} text="Delete" type="secondary" size="compact" />
+              <Button onClickFunction={() => updateVariablesAndShowModal()} text="Edit" variant="primary" size="compact" />
+              <Button onClickFunction={() => setShowDeleteModal(true)} text="Delete" variant="secondary" size="compact" />
             </ReviewButtonsWrapper>
           )}
         </CardSideWrapper>
@@ -147,7 +147,6 @@ const AlbumCoverWrapper = styled.div`
 const AlbumUserWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  ${"" /* align-items: center; */}
   justify-content: space-between;
   padding-bottom: 15px;
 `;

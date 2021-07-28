@@ -29,8 +29,8 @@ const Wave = styled.img`
 
 const Background = styled.div`
   background: linear-gradient(180deg, #45af47 0%, #a7e961 100%);
-  position: absolute;
-  width: 100%;
-  height: 100vh;
+  position: fixed;
+  width: -webkit-fill-available;
+  height: -webkit-fill-available;
   z-index: -1;
 `;

@@ -4,17 +4,18 @@ import withApollo from "@/hoc/withApollo";
 import { getSession, providers, useSession } from "next-auth/client";
 import React from "react";
 import styled from "styled-components";
+import BaseLayout from "@/layouts/BaseLayout";
 
 const Login = () => {
   const [session, loading] = useSession();
   const { data } = GetAllReviewsQuery();
 
   return (
-    <>
+    <BaseLayout>
       <Wrapper>
         <LoginCard session={session} />
       </Wrapper>
-    </>
+    </BaseLayout>
   );
 };
 

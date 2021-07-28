@@ -4,15 +4,18 @@ import withApollo from "@/hoc/withApollo";
 import { getSession, providers, signOut, useSession } from "next-auth/client";
 import React from "react";
 import styled from "styled-components";
+import BaseLayout from "@/layouts/BaseLayout";
 
 const Home = () => {
   const [session, loading] = useSession();
   const { data } = GetAllReviewsQuery();
 
   return (
-    <>
+    <BaseLayout>
       {session && (
         <HomeWrapper>
+          {/* TODO: Add Sign out to Navbar */}
+          <button onClick={signOut}>Sign out</button>
           {data &&
             data.getAllReviews.map((review) => (
               <ReviewCardWrapper key={review._id}>
@@ -29,10 +32,9 @@ const Home = () => {
                 />
               </ReviewCardWrapper>
             ))}
-          <button onClick={signOut}>Sign out</button>
         </HomeWrapper>
       )}
-    </>
+    </BaseLayout>
   );
 };
 
@@ -60,7 +62,6 @@ const HomeWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  ${"" /* justify-content: center; */}
 `;
 
 const ReviewCardWrapper = styled.div`

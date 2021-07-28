@@ -1,10 +1,12 @@
 import { EditReviewMutation } from "@/apollo/actions";
 import { GET_ALL_REVIEWS_BY_SUB_QUERY } from "@/apollo/queries";
+import { modalStyles } from "@/variables/shared";
 import Image from "next/image";
 import { useState } from "react";
 import { Modal } from "react-responsive-modal";
 import { Star } from "react-star";
 import styled from "styled-components";
+import Button from "@/components/shared/Button";
 
 const EditReview = ({ open, onClose, id, sub, image, album, rating: currentRating, artist, review }) => {
   const [rating, setRating] = useState(currentRating);
@@ -23,29 +25,94 @@ const EditReview = ({ open, onClose, id, sub, image, album, rating: currentRatin
 
   return (
     <>
-      <Modal open={open} onClose={onClose} center>
-        <h1>Edit Review</h1>
-        <Wrapper>
-          <Image src={image} alt="Album cover" width={100} height={100} />
-          <AlbumSpan>{album}</AlbumSpan>
-          <ArtistSpan>{artist}</ArtistSpan>
+      <Modal open={open} onClose={onClose} center styles={modalStyles}>
+        <Title>Edit Review</Title>
+        <EditReviewWrapper>
+          <AlbumWrapper>
+            <AlbumImageWrapper>
+              <Image src={image} alt="Album cover" layout="fill" objectFit="contain" />
+            </AlbumImageWrapper>
+            <AlbumInfoWrapper>
+              <AlbumSpan>{album}</AlbumSpan>
+              <ArtistSpan>{artist}</ArtistSpan>
+            </AlbumInfoWrapper>
+          </AlbumWrapper>
           <AddReviewTextArea rows="4" cols="50" value={textAreaVal} onChange={(e) => setTextAreaVal(e.target.value)}></AddReviewTextArea>
-          {/* <ReactStars count={5} value={rating} half={true} size={20} onChange={(newRating) => setRating(newRating)} color2="#A7E961" /> */}
-          <Star defaultValue={rating} onChange={(newRating) => setRating(newRating)} fraction={2} />
-          <SaveButton onClick={() => handleEdit()}>Edit</SaveButton>
-        </Wrapper>
+          <Footer>
+            <Star defaultValue={rating} onChange={(newRating) => setRating(newRating)} fraction={2} />
+            <Button onClickFunction={() => handleEdit()} text="Edit" variant="primary" size="compact" />
+          </Footer>
+        </EditReviewWrapper>
       </Modal>
     </>
   );
 };
 export default EditReview;
 
-const Wrapper = styled.div``;
+const EditReviewWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+`;
 
-const AlbumSpan = styled.span``;
+const Title = styled.span`
+  font-size: 15px;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.075em;
+  font-weight: 400;
+  margin-bottom: 15px;
+`;
 
-const ArtistSpan = styled.span``;
+const AlbumWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 10px;
+`;
 
-const AddReviewTextArea = styled.textarea``;
+const AlbumImageWrapper = styled.div`
+  width: 140px;
+  height: 140px;
+  position: relative;
+`;
 
-const SaveButton = styled.button``;
+const AlbumInfoWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 10px;
+`;
+
+const AlbumSpan = styled.span`
+  font-size: 20px;
+  font-weight: bold;
+  color: #212529;
+  margin-bottom: 5px;
+`;
+
+const ArtistSpan = styled.span`
+  font-size: 15px;
+  color: #495057;
+`;
+
+const AddReviewTextArea = styled.textarea`
+  margin-bottom: 10px;
+  border: 0.1rem solid #d1d1d1;
+  border-radius: 0.4rem;
+  height: 3.8rem;
+  padding: 0.6rem 1rem 0.7rem;
+  resize: vertical;
+  &:focus {
+    border-color: #a7e961;
+    outline: 0;
+  }
+`;
+
+const Footer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  button {
+    width: 100px;
+  }
+`;

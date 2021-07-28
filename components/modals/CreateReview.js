@@ -5,7 +5,8 @@ import { useSession } from "next-auth/client";
 import Image from "next/image";
 import ReactStars from "react-rating-stars-component";
 import { CreateReviewMutation } from "@/apollo/actions";
-import withApollo from "@/hoc/withApollo";
+import Button from "@/components/shared/Button";
+import { modalStyles } from "@/variables/shared";
 
 const CreateReview = ({ open, onClose, albumVariables }) => {
   const [rating, setRating] = useState(0);
@@ -33,28 +34,101 @@ const CreateReview = ({ open, onClose, albumVariables }) => {
 
   return (
     <>
-      <Modal open={open} onClose={onClose} center>
-        <h1>Create Review</h1>
-        <Wrapper>
-          <Image src={albumVariables.image} alt="Album cover" width={100} height={100} />
-          <AlbumSpan>{albumVariables.album}</AlbumSpan>
-          <ArtistSpan>{albumVariables.artist}</ArtistSpan>
+      <Modal open={open} onClose={onClose} center styles={modalStyles}>
+        <Title>Review this album! ✍️</Title>
+        <CreateReviewWrapper>
+          <AlbumWrapper>
+            <AlbumImageWrapper>
+              <Image src={albumVariables.image} alt="Album cover" layout="fill" objectFit="contain" />
+            </AlbumImageWrapper>
+            <AlbumInfoWrapper>
+              <AlbumSpan>{albumVariables.album}</AlbumSpan>
+              <ArtistSpan>{albumVariables.artist}</ArtistSpan>
+            </AlbumInfoWrapper>
+          </AlbumWrapper>
           <AddReviewTextArea rows="4" cols="50" onChange={(e) => setTextAreaVal(e.target.value)}></AddReviewTextArea>
-          <ReactStars count={5} isHalf={true} onChange={(newRating) => setRating(newRating)} size={24} activeColor="#A7E961" />
-          <SaveButton onClick={() => saveData()}>Save</SaveButton>
-        </Wrapper>
+          <Footer>
+            <ReactStars
+              styles={{ flex: "3 1 auto" }}
+              count={5}
+              isHalf={true}
+              onChange={(newRating) => setRating(newRating)}
+              size={24}
+              activeColor="#A7E961"
+            />
+            <Button styles={{ flex: "1 0 100px" }} onClickFunction={() => saveData()} text="Save" variant="primary" size="compact" />
+          </Footer>
+        </CreateReviewWrapper>
       </Modal>
     </>
   );
 };
-export default withApollo(CreateReview);
+export default CreateReview;
 
-const Wrapper = styled.div``;
+const CreateReviewWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+`;
 
-const AlbumSpan = styled.span``;
+const AlbumWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 10px;
+`;
 
-const ArtistSpan = styled.span``;
+const Title = styled.span`
+  font-size: 15px;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.075em;
+  font-weight: 400;
+  margin-bottom: 15px;
+`;
 
-const AddReviewTextArea = styled.textarea``;
+const AlbumInfoWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 10px;
+`;
 
-const SaveButton = styled.button``;
+const AlbumImageWrapper = styled.div`
+  width: 140px;
+  height: 140px;
+  position: relative;
+`;
+
+const AlbumSpan = styled.span`
+  font-size: 20px;
+  font-weight: bold;
+  color: #212529;
+  margin-bottom: 5px;
+`;
+
+const ArtistSpan = styled.span`
+  font-size: 15px;
+  color: #495057;
+`;
+
+const AddReviewTextArea = styled.textarea`
+  margin-bottom: 10px;
+  border: 0.1rem solid #d1d1d1;
+  border-radius: 0.4rem;
+  height: 3.8rem;
+  padding: 0.6rem 1rem 0.7rem;
+  resize: vertical;
+  &:focus {
+    border-color: #a7e961;
+    outline: 0;
+  }
+`;
+
+const Footer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  button {
+    width: 100px;
+  }
+`;

@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
-const Button = ({ onClickFunction, text, type, size }) => {
+const Button = ({ onClickFunction, text, variant, size }) => {
   return (
-    <CardButton onClick={onClickFunction} type={type} size={size}>
+    <CardButton type="submit" onClick={onClickFunction} variant={variant} size={size}>
       {text}
     </CardButton>
   );
@@ -11,14 +11,14 @@ const Button = ({ onClickFunction, text, type, size }) => {
 export default Button;
 
 const CardButton = styled.button`
-  ${({ type }) => {
-    if (!type || type === "primary") return "background-color: #2ea44f;";
-    else if (type === "secondary") return "background-color: #e03131;";
+  ${({ variant }) => {
+    if (!variant || variant === "primary") return "background-color: #2ea44f;";
+    else if (variant === "secondary") return "background-color: #e03131;";
   }};
   background-image: linear-gradient(180deg, hsla(0, 0%, 100%, 0.15), hsla(0, 0%, 100%, 0));
-  ${({ type }) => {
-    if (!type || type === "primary") return "border-color: #2ea44f;";
-    else if (type === "secondary") return "border-color: #e03131;";
+  ${({ variant }) => {
+    if (!variant || variant === "primary") return "border-color: #2ea44f;";
+    else if (variant === "secondary") return "border-color: #e03131;";
   }};
   box-shadow: 0 1px 1px rgb(18 21 26 / 8%);
   color: #fff;

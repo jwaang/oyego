@@ -1,11 +1,11 @@
-import styled from "styled-components";
-import { Modal } from "react-responsive-modal";
-import withApollo from "@/hoc/withApollo";
-import { getDataFromTree } from "@apollo/react-ssr";
-import { GET_ALL_REVIEWS_BY_SUB_QUERY } from "@/apollo/queries";
 import { DeleteReviewMutation } from "@/apollo/actions";
+import { GET_ALL_REVIEWS_BY_SUB_QUERY } from "@/apollo/queries";
+import { modalStyles } from "@/variables/shared";
+import { Modal } from "react-responsive-modal";
+import styled from "styled-components";
+import Button from "@/components/shared/Button";
 
-const DeleteReview = ({ id, sub, open, onClose }) => {
+const DeleteReview = ({ id, sub, open, onClose, album, artist }) => {
   const [deleteReview] = DeleteReviewMutation({
     // get deleteReview which is the ObjectID
     update(cache, { data: { deleteReview } }) {
@@ -33,11 +33,15 @@ const DeleteReview = ({ id, sub, open, onClose }) => {
 
   return (
     <>
-      <Modal open={open} onClose={onClose} center>
-        <h1>Delete Review</h1>
+      <Modal open={open} onClose={onClose} center styles={modalStyles}>
+        <Title>Please confirm</Title>
         <Wrapper>
-          <TextSpan>Are you sure you wish to delete this review?</TextSpan>
-          <DeleteButton onClick={() => handleDelete()}>Delete</DeleteButton>
+          <Body>
+            Are you sure you wish to delete your review of <Bold>{album}</Bold> by <Bold>{artist}</Bold>?
+          </Body>
+          <ButtonWrapper>
+            <Button onClickFunction={() => handleDelete()} text="Delete" variant="secondary" size="compact" />
+          </ButtonWrapper>
         </Wrapper>
       </Modal>
     </>
@@ -45,8 +49,30 @@ const DeleteReview = ({ id, sub, open, onClose }) => {
 };
 export default DeleteReview;
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 
-const TextSpan = styled.span``;
+const Title = styled.div`
+  font-size: 15px;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.075em;
+  font-weight: 400;
+  margin-bottom: 15px;
+`;
 
-const DeleteButton = styled.button``;
+const Body = styled.div`
+  margin-bottom: 15px;
+`;
+
+const ButtonWrapper = styled.div`
+  margin-left: auto;
+  width: 100px;
+`;
+
+const Bold = styled.span`
+  font-weight: 500;
+  color: #fff;
+`;

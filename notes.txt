@@ -45,3 +45,17 @@ added show more / show less for long reviews
 added the date for when the review was created 
 button is a reusable component with different variants
 problem: we store the users profile pic in db but the image url expires...
+
+7/27/21
+styled search page
+styled create review modal
+styled delete modal
+styled user page
+styled navbar with redirection
+background now takes up whole page regardles of child container height
+added baselayout wrapper
+can probably reuse a lot of these styled components...
+pressing enter will now trigger a search
+todo: signout functionality and positioning for navbar and other containers
+todo: add more micro animations like button hovers
+todo: add page animations

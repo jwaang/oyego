@@ -1,4 +1,4 @@
-import messages from "@/variables/messages";
+import { messages } from "@/variables/shared";
 import { signIn } from "next-auth/client";
 import { useRouter } from "next/router";
 import styled from "styled-components";
