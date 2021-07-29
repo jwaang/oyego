@@ -44,4 +44,8 @@ const CardButton = styled.button`
   user-select: none;
   vertical-align: middle;
   width: 100%;
+
+  :hover {
+    background-color: #50555b;
+  }
 `;

@@ -36,11 +36,11 @@ const Navbar = () => {
       <Link href="/home" passHref>
         <Title>Oyego</Title>
       </Link>
-      <MenuWrapper count={3} ref={ref}>
+      <MenuWrapper count={1} ref={ref}>
         <MainButtons>
           <MenuButton href="/home" title="Home" icon={"/images/icons/home.svg"} />
           <MenuButton href="/search" title="Search" icon={"/images/icons/search.svg"} />
-          <MenuButton href="" title="" icon={"/images/icons/settings.svg"} onClick={(e) => handleClick(e)} />
+          <MenuButton href="/" title="" icon={"/images/icons/settings.svg"} onClick={(e) => handleClick(e)} />
         </MainButtons>
         <HamburgerWrapper>
           <MenuButton href="/" title="" icon={"/images/icons/hamburger.svg"} onClick={(event) => handleClick(event)} />
@@ -55,17 +55,17 @@ export default withApollo(Navbar);
 
 const Title = styled.span`
   color: #fff;
-  font-size: 25px;
-  font-weight: 500;
+  font-size: 30px;
+  font-weight: bold;
   cursor: pointer;
 `;
 
 const NavbarWrapper = styled.div`
   position: absolute;
-  top: 60px;
+  top: 20px;
   display: grid;
   grid-template-columns: 45px auto;
-  width: 100%;
+  width: -webkit-fill-available;
   justify-content: space-between;
   padding: 0 30px;
   align-items: center;

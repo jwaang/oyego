@@ -9,13 +9,12 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@apollo/react-ssr": "^4.0.0",
+    "@apollo/client": "^3.3.21",
     "apollo-boost": "^0.4.9",
     "apollo-server-express": "^2.25.2",
     "babel-plugin-styled-components": "^1.13.2",
     "express": "^4.17.1",
     "graphql": "^15.5.1",
-    "jsonwebtoken": "^8.5.1",
     "moment": "^2.29.1",
     "mongoose": "^5.13.2",
     "next": "11.0.1",
@@ -24,12 +23,8 @@
     "nodemon": "^2.0.12",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "react-moment": "^1.1.1",
-    "react-rating": "^2.0.5",
-    "react-rating-stars-component": "^2.2.0",
     "react-responsive-modal": "^6.1.0",
     "react-star": "^1.1.0",
-    "react-stars": "^2.2.5",
     "styled-components": "^5.3.0"
   },
   "devDependencies": {

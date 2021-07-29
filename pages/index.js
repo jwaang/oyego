@@ -1,14 +1,23 @@
-import { GetAllReviewsQuery } from "@/apollo/actions";
 import LoginCard from "@/components/cards/LoginCard";
+import Spinner from "@/components/shared/Spinner";
 import withApollo from "@/hoc/withApollo";
+import BaseLayout from "@/layouts/BaseLayout";
 import { getSession, providers, useSession } from "next-auth/client";
 import React from "react";
 import styled from "styled-components";
-import BaseLayout from "@/layouts/BaseLayout";
 
 const Login = () => {
   const [session, loading] = useSession();
-  const { data } = GetAllReviewsQuery();
+
+  if (loading)
+    return (
+      <BaseLayout>
+        &nbsp;
+        <Spinner />
+      </BaseLayout>
+    );
+
+  if (typeof window !== "undefined" && loading) return null;
 
   return (
     <BaseLayout>

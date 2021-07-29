@@ -56,6 +56,24 @@ background now takes up whole page regardles of child container height
 added baselayout wrapper
 can probably reuse a lot of these styled components...
 pressing enter will now trigger a search
-todo: signout functionality and positioning for navbar and other containers
-todo: add more micro animations like button hovers
-todo: add page animations
+
+7/28/21
+signout functionality and positioning for navbar and other containers
+updated redirect signin signout callback url
+fixed bug where home page could still be accessed by unauthenticated user
+added button hover styling
+added titles to all pages 
+added spinner
+cleaned up packages
+fixed issue where hamburger menu did not contain all menu items
+added faq modal - need to finish
+next/image Un-configured Host with dynamic host names is an issue 
+- use mongodb gridfs?
+
+todo: framer-motion add page animations
+todo: add some mobile responsiveness
+todo: improve typography!!!
+
+Fix issue: 
+Error: Invalid src prop (https://scontent-yyz1-1.xx.fbcdn.net/v/t1.6435-1/p320x320/122060772_3560086127348163_2012032160532304373_n.jpg?_nc_cat=102&ccb=1-3&_nc_sid=0c64ff&_nc_ohc=D0eYFBV6vzoAX-5NwtL&_nc_ht=scontent-yyz1-1.xx&oh=d3774893b0a949814facb499147f9308&oe=61285950) on `next/image`, hostname "scontent-yyz1-1.xx.fbcdn.net" is not configured under images in your `next.config.js`
+See more info: https://nextjs.org/docs/messages/next-image-unconfigured-host

@@ -66,7 +66,7 @@ const ReviewCard = ({ id, sub, image, album, artist, name, review, rating, user_
             </AlbumInfo>
 
             <UserWrapper>
-              <Star defaultValue={rating} fraction={2} readOnly={true} />
+              <Star defaultValue={rating} fraction={2} readOnly={true} shape="fat" />
               <Link href={`/user/${sub}`} passHref>
                 <UserInfo>
                   <ProfileImageWrapper>

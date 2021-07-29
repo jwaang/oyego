@@ -1,12 +1,12 @@
-import styled from "styled-components";
-import { Modal } from "react-responsive-modal";
-import { useState } from "react";
-import { useSession } from "next-auth/client";
-import Image from "next/image";
-import ReactStars from "react-rating-stars-component";
 import { CreateReviewMutation } from "@/apollo/actions";
 import Button from "@/components/shared/Button";
 import { modalStyles } from "@/variables/shared";
+import { useSession } from "next-auth/client";
+import Image from "next/image";
+import { useState } from "react";
+import { Modal } from "react-responsive-modal";
+import { Star } from "react-star";
+import styled from "styled-components";
 
 const CreateReview = ({ open, onClose, albumVariables }) => {
   const [rating, setRating] = useState(0);
@@ -48,14 +48,7 @@ const CreateReview = ({ open, onClose, albumVariables }) => {
           </AlbumWrapper>
           <AddReviewTextArea rows="4" cols="50" onChange={(e) => setTextAreaVal(e.target.value)}></AddReviewTextArea>
           <Footer>
-            <ReactStars
-              styles={{ flex: "3 1 auto" }}
-              count={5}
-              isHalf={true}
-              onChange={(newRating) => setRating(newRating)}
-              size={24}
-              activeColor="#A7E961"
-            />
+            <Star defaultValue={rating} onChange={(newRating) => setRating(newRating)} fraction={2} shape="fat" />
             <Button styles={{ flex: "1 0 100px" }} onClickFunction={() => saveData()} text="Save" variant="primary" size="compact" />
           </Footer>
         </CreateReviewWrapper>

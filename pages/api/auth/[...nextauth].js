@@ -66,7 +66,12 @@ const options = {
       return session;
     },
     redirect: async (url, baseUrl) => {
-      return Promise.resolve("http://localhost:3000/home");
+      if (url === "http://localhost:3000/home") {
+        // used by signIn
+        return Promise.resolve("http://localhost:3000/home");
+      }
+      // used by signOut
+      return Promise.resolve("http://localhost:3000/");
     },
   },
 };

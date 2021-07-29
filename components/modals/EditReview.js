@@ -39,7 +39,7 @@ const EditReview = ({ open, onClose, id, sub, image, album, rating: currentRatin
           </AlbumWrapper>
           <AddReviewTextArea rows="4" cols="50" value={textAreaVal} onChange={(e) => setTextAreaVal(e.target.value)}></AddReviewTextArea>
           <Footer>
-            <Star defaultValue={rating} onChange={(newRating) => setRating(newRating)} fraction={2} />
+            <Star defaultValue={rating} onChange={(newRating) => setRating(newRating)} fraction={2} shape="fat" />
             <Button onClickFunction={() => handleEdit()} text="Edit" variant="primary" size="compact" />
           </Footer>
         </EditReviewWrapper>
@@ -67,7 +67,7 @@ const Title = styled.span`
 const AlbumWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 `;
 
 const AlbumImageWrapper = styled.div`
@@ -96,7 +96,7 @@ const ArtistSpan = styled.span`
 `;
 
 const AddReviewTextArea = styled.textarea`
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   border: 0.1rem solid #d1d1d1;
   border-radius: 0.4rem;
   height: 3.8rem;

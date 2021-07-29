@@ -1,21 +1,33 @@
 import { GetAllReviewsQuery } from "@/apollo/actions";
 import ReviewCard from "@/components/cards/ReviewCard";
+import Redirect from "@/components/shared/Redirect";
+import Spinner from "@/components/shared/Spinner";
 import withApollo from "@/hoc/withApollo";
-import { getSession, providers, signOut, useSession } from "next-auth/client";
+import BaseLayout from "@/layouts/BaseLayout";
+import { getSession, providers, useSession } from "next-auth/client";
 import React from "react";
 import styled from "styled-components";
-import BaseLayout from "@/layouts/BaseLayout";
 
 const Home = () => {
   const [session, loading] = useSession();
-  const { data } = GetAllReviewsQuery();
+  const { loading: searchLoading, data } = GetAllReviewsQuery();
+
+  if (loading)
+    return (
+      <BaseLayout>
+        &nbsp;
+        <Spinner />
+      </BaseLayout>
+    );
+
+  if (typeof window !== "undefined" && loading) return null;
 
   return (
     <BaseLayout>
       {session && (
         <HomeWrapper>
-          {/* TODO: Add Sign out to Navbar */}
-          <button onClick={signOut}>Sign out</button>
+          <Title>Most recent reviews</Title>
+          {searchLoading && <Spinner />}
           {data &&
             data.getAllReviews.map((review) => (
               <ReviewCardWrapper key={review._id}>
@@ -34,6 +46,7 @@ const Home = () => {
             ))}
         </HomeWrapper>
       )}
+      {!session && <Redirect to="/" query={{ message: "NOT_AUTHENTICATED" }} />}
     </BaseLayout>
   );
 };
@@ -57,11 +70,24 @@ Home.getInitialProps = async (context) => {
   };
 };
 
+const Title = styled.span`
+  font-size: 25px;
+  color: #fff;
+  text-transform: uppercase;
+  -webkit-letter-spacing: 0.075em;
+  -moz-letter-spacing: 0.075em;
+  -ms-letter-spacing: 0.075em;
+  letter-spacing: 0.15em;
+  font-weight: 500;
+  margin-bottom: 25px;
+`;
+
 const HomeWrapper = styled.div`
   height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-top: 80px;
 `;
 
 const ReviewCardWrapper = styled.div`

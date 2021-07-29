@@ -37,7 +37,7 @@ const DeleteReview = ({ id, sub, open, onClose, album, artist }) => {
         <Title>Please confirm</Title>
         <Wrapper>
           <Body>
-            Are you sure you wish to delete your review of <Bold>{album}</Bold> by <Bold>{artist}</Bold>?
+            Are you sure you want to delete your review of <Bold>{album}</Bold> by <Bold>{artist}</Bold>?
           </Body>
           <ButtonWrapper>
             <Button onClickFunction={() => handleDelete()} text="Delete" variant="secondary" size="compact" />

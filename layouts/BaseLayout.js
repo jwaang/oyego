@@ -1,12 +1,15 @@
 import styled from "styled-components";
 import WaveBackground from "@/components/backgrounds/WaveBackground";
 import Navbar from "@/components/shared/Navbar";
+import { useRouter } from "next/router";
 
 const BaseLayout = ({ children }) => {
+  const router = useRouter();
+
   return (
     <BaseLayoutWrapper>
       <WaveBackground />
-      <Navbar />
+      {router.pathname !== "/" && <Navbar />}
       <Container>{children}</Container>
     </BaseLayoutWrapper>
   );
