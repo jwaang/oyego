@@ -9,9 +9,9 @@ module.exports = {
     return config;
   },
   env: {
-    BASE_URL: dev ? "http://localhost:3000/graphql" : "https://jonathan-wang.herokuapp.com//graphql",
+    BASE_URL: dev ? "http://localhost:3000/graphql" : "https://oyego.herokuapp.com/graphql",
   },
   images: {
-    domains: ["i.scdn.co", "scontent-ort2-2.xx.fbcdn.net", "scontent-ort2-1.xx.fbcdn.net", "scontent-yyz1-1.xx.fbcdn.net"],
+    domains: ["i.scdn.co"],
   },
 };

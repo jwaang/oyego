@@ -13,7 +13,7 @@ export default withApollo(
           headers,
         });
       },
-      uri: config.BASE_URL,
+      uri: `${config.BASE_URL}/graphql`,
       cache: new InMemoryCache({
         typePolicies: {
           Query: {

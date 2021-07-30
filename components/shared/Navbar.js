@@ -72,14 +72,6 @@ const NavbarWrapper = styled.div`
   justify-content: space-between;
   padding: 0 30px;
   align-items: center;
-
-  @media (max-width: 768px) {
-    top: 30px;
-  }
-  @media (max-width: 450px) {
-    top: 20px;
-    padding: 0 20px;
-  }
 `;
 
 const MenuWrapper = styled.div`
@@ -91,7 +83,7 @@ const MenuWrapper = styled.div`
 const MainButtons = styled.div`
   display: flex;
   flex-direction: row;
-  @media (max-width: 768px) {
+  @media (max-width: 769px) {
     display: none;
   }
 `;
@@ -99,7 +91,7 @@ const MainButtons = styled.div`
 const HamburgerWrapper = styled.div`
   display: none;
 
-  @media (max-width: 768px) {
+  @media (max-width: 769px) {
     display: block;
   }
 `;

@@ -79,5 +79,4 @@ fixed bug where expired tokens was not kicking user out - should add resfresh to
 cleaned up styling and improved typography
 See more info: https://nextjs.org/docs/messages/next-image-unconfigured-host
 - Unable to fix due to dynamic hostnames from Spotify, disabling profile pic
-
-todo: added some mobile responsiveness
+added some mobile responsiveness

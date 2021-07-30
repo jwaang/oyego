@@ -71,12 +71,12 @@ const options = {
       return null;
     },
     redirect: async (url, baseUrl) => {
-      if (url === "http://localhost:3000/home") {
+      if (url === `${config.BASE_URL}/home`) {
         // used by signIn
-        return Promise.resolve("http://localhost:3000/home");
+        return Promise.resolve(`${config.BASE_URL}/home`);
       }
       // used by signOut
-      return Promise.resolve("http://localhost:3000/");
+      return Promise.resolve(`${config.BASE_URL}/`);
     },
   },
 };

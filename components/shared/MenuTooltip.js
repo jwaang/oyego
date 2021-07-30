@@ -2,6 +2,7 @@ import MenuButton from "@/components/shared/MenuButton";
 import { signOut } from "next-auth/client";
 import React from "react";
 import styled from "styled-components";
+const config = require("@/server/config");
 
 export default function MenuTooltip({ isOpen, sub }) {
   return (
@@ -11,7 +12,7 @@ export default function MenuTooltip({ isOpen, sub }) {
         <MenuButton href="/search" title="Search" icon={"/images/icons/search.svg"} />
       </MainButtons>
       <MenuButton href={`/user/${sub}`} title="Your Profile" icon={"/images/icons/profile.svg"} />
-      <div onClick={() => signOut({ callbackUrl: "http://localhost:3000/" })}>
+      <div onClick={() => signOut({ callbackUrl: `${config.BASE_URL}/` })}>
         <MenuButton href="/" title="Sign Out" icon={"/images/icons/signout.svg"} />
       </div>
     </Wrapper>
