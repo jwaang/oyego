@@ -18,7 +18,7 @@ const options = {
       profileUrl: "https://api.spotify.com/v1/me",
       clientId: config.SPOTIFY_CLIENT_ID,
       clientSecret: config.SPOTIFY_CLIENT_SECRET,
-
+      state: false, // Disable the state feature
       profile(profile) {
         return {
           id: profile.id,
