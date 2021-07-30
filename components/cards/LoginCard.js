@@ -37,7 +37,7 @@ const LoginCard = () => {
             </motion.div>
           </CardSub>
           <motion.div initial={{ opacity: 0, x: 100 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.95, ease: "easeInOut", duration: 0.5 }}>
-            <Button onClickFunction={() => signIn("spotify")} text="Sign in with Spotify" />
+            <Button onClickFunction={() => signIn("spotify", { callbackUrl: `${config.BASE_URL}/home` })} text="Sign in with Spotify" />
           </motion.div>
           <Me onClick={() => setShowFAQ(true)}>
             <motion.div initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0, transition: { delay: 1.05, ease: "easeInOut", duration: 0.5 } }}>
