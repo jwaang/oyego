@@ -9,7 +9,7 @@ module.exports = {
     return config;
   },
   env: {
-    BASE_URL: dev ? "http://localhost:3000/graphql" : "https://oyego.herokuapp.com/graphql",
+    BASE_URL: dev ? "http://localhost:3000" : "https://oyego.herokuapp.com",
   },
   images: {
     domains: ["i.scdn.co"],
