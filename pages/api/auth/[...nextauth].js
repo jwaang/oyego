@@ -71,7 +71,8 @@ const options = {
       return null;
     },
     redirect: async (url, baseUrl) => {
-      console.log("ur", url);
+      console.log("env", process.env.BASE_URL);
+      console.log("url", url);
       console.log("config", `${config.BASE_URL}/home`);
       if (url === `${config.BASE_URL}/home`) {
         // used by signIn
