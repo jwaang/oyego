@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "nodemon --watch server server/index.js",
     "build": "next build",
-    "start": "next start",
+    "start": "cross-env NODE_ENV=production node server/index.js",
     "lint": "next lint"
   },
   "dependencies": {
@@ -13,6 +13,7 @@
     "apollo-boost": "^0.4.9",
     "apollo-server-express": "^2.25.2",
     "babel-plugin-styled-components": "^1.13.2",
+    "cross-env": "^7.0.3",
     "express": "^4.17.1",
     "framer-motion": "^4.1.17",
     "graphql": "^15.5.1",
