@@ -70,17 +70,6 @@ const options = {
       }
       return null;
     },
-    redirect: async (url, baseUrl) => {
-      console.log("env", process.env.BASE_URL);
-      console.log("url", url);
-      console.log("config", `${config.BASE_URL}/home`);
-      if (url === `${config.BASE_URL}/home`) {
-        // used by signIn
-        return Promise.resolve(`${config.BASE_URL}/home`);
-      }
-      // used by signOut
-      return Promise.resolve(`${config.BASE_URL}/`);
-    },
   },
 };
 
