@@ -11,4 +11,7 @@ module.exports = {
   images: {
     domains: ["i.scdn.co"],
   },
+  env: {
+    BASE_URL_GRAPH: dev ? "http://localhost:3000/graphql" : "https://oyego.herokuapp.com/graphql",
+  },
 };

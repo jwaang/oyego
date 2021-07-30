@@ -1,4 +1,6 @@
-import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
+// import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
+import ApolloClient, { InMemoryCache } from "apollo-boost";
+import { ApolloProvider } from "@apollo/react-hooks";
 import withApollo from "next-with-apollo";
 import config from "@/server/config";
 
@@ -13,7 +15,7 @@ export default withApollo(
           headers,
         });
       },
-      uri: `${config.BASE_URL}/graphql`,
+      uri: process.env.BASE_URL_GRAPH,
       cache: new InMemoryCache({
         typePolicies: {
           Query: {

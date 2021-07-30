@@ -5,7 +5,7 @@ require("./models/review");
 
 exports.connect = () => {
   mongoose.connect(
-    config.DATABASE,
+    "mongodb+srv://user_001:12345@cluster0.cbcig.mongodb.net/oyego?authSource=admin&replicaSet=atlas-j4meo1-shard-0&readPreference=primary&appname=MongoDB%20Compass&ssl=true",
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,

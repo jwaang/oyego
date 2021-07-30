@@ -71,10 +71,7 @@ const options = {
       return null;
     },
     redirect: async (url, baseUrl) => {
-      console.log("env", process.env.BASE_URL);
-      console.log("url", url);
-      console.log("base", baseUrl);
-      console.log("config", `${config.BASE_URL}/home`);
+      // For local
       // if (url === `${config.BASE_URL}/home`) {
       //   // used by signIn
       //   return Promise.resolve(`${config.BASE_URL}/home`);
