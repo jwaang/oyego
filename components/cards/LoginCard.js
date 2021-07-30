@@ -5,6 +5,8 @@ import styled from "styled-components";
 import Button from "@/components/shared/Button";
 import FAQ from "@/components/modals/FAQ";
 import { useState } from "react";
+import { motion } from "framer-motion";
+import { GlassEffect } from "@/variables/shared";
 
 const LoginCard = () => {
   const router = useRouter();
@@ -12,23 +14,48 @@ const LoginCard = () => {
   const [showFAQ, setShowFAQ] = useState(false);
 
   return (
-    <>
-      <Wrapper>
-        <FAQ onClose={() => setShowFAQ(false)} open={showFAQ}></FAQ>
+    <Wrapper>
+      <FAQ onClose={() => setShowFAQ(false)} open={showFAQ}></FAQ>
+      <motion.div initial={{ opacity: 0, y: -500 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.25, type: "spring", stiffness: 120 }}>
         <GlassCard>
-          <CardHeader>Oyego</CardHeader>
-          <CardSub>The social app for music lovers</CardSub>
-          <Button onClickFunction={() => signIn("spotify", { callbackUrl: "http://localhost:3000/home" })} text="Sign in with Spotify" />
-          <Me onClick={() => setShowFAQ(true)}>Made with 🤌 by @jwaang</Me>
+          <CardHeader>
+            <motion.div
+              initial={{ opacity: 0, y: -50 }}
+              animate={{ opacity: 1, y: 0, transition: { delay: 0.75, ease: "easeInOut", duration: 0.5 } }}
+            >
+              Oyego
+            </motion.div>
+          </CardHeader>
+          <CardSub>
+            <motion.div
+              initial={{ opacity: 0, x: -100 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.85, ease: "easeInOut", duration: 0.5 }}
+            >
+              The social app for music lovers
+            </motion.div>
+          </CardSub>
+          <motion.div initial={{ opacity: 0, x: 100 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.95, ease: "easeInOut", duration: 0.5 }}>
+            <Button onClickFunction={() => signIn("spotify", { callbackUrl: "http://localhost:3000/home" })} text="Sign in with Spotify" />
+          </motion.div>
+          <Me onClick={() => setShowFAQ(true)}>
+            <motion.div initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0, transition: { delay: 1.05, ease: "easeInOut", duration: 0.5 } }}>
+              <motion.div initial={{ scale: 1 }} animate={{ scale: 0.925, transition: { duration: 1.25, ease: "easeInOut", yoyo: Infinity } }}>
+                Created by @jwaang
+              </motion.div>
+            </motion.div>
+          </Me>
           {message && (
-            <>
-              <Line />
-              <ErrorMessage>{messages[message].value}</ErrorMessage>
-            </>
+            <ErrorMessage
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0, transition: { delay: 1.25, ease: "easeInOut", duration: 0.5 } }}
+            >
+              {messages[message].value}
+            </ErrorMessage>
           )}
         </GlassCard>
-      </Wrapper>
-    </>
+      </motion.div>
+    </Wrapper>
   );
 };
 export default LoginCard;
@@ -44,28 +71,17 @@ const Me = styled.a`
   font-size: 12px;
 `;
 
-const Line = styled.div`
-  margin-top: 15px;
-  border-top: 1px solid rgba(75, 86, 99, 0.35);
-  width: 100%;
-`;
-
 const GlassCard = styled.div`
   display: flex;
   flex-direction: column;
   padding: 20px;
-
-  backdrop-filter: blur(15px) saturate(120%);
-  -webkit-backdrop-filter: blur(15px) saturate(120%);
-  background-color: rgba(255, 255, 255, 0.2);
-  border-radius: 12px;
-  border: 1px solid rgba(209, 213, 219, 0.3);
+  ${GlassEffect}
 `;
 
 const CardHeader = styled.span`
   color: #fff;
   font-size: 40px;
-  font-weight: 500;
+  font-weight: bold;
   padding-bottom: 15px;
 `;
 
@@ -74,8 +90,8 @@ const CardSub = styled.span`
   padding-bottom: 15px;
 `;
 
-const ErrorMessage = styled.span`
+const ErrorMessage = styled(motion.div)`
   margin-top: 15px;
   font-size: 12px;
-  color: #4b5663;
+  color: #e03131;
 `;

@@ -15,6 +15,22 @@ exports.searchQuerys = {
       });
     return response;
   },
+  getUserProfile: async (root, { input }, ctx) => {
+    const { sub, accessToken } = input;
+    const response = await fetch(`https://api.spotify.com/v1/users/${sub}`, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        return result;
+      });
+    return response;
+  },
 };
 
 exports.reviewMutations = {

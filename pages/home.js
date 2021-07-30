@@ -7,18 +7,13 @@ import BaseLayout from "@/layouts/BaseLayout";
 import { getSession, providers, useSession } from "next-auth/client";
 import React from "react";
 import styled from "styled-components";
+import { motion } from "framer-motion";
+import { Title } from "@/variables/shared";
 
 const Home = () => {
   const [session, loading] = useSession();
   const { loading: searchLoading, data } = GetAllReviewsQuery();
-
-  if (loading)
-    return (
-      <BaseLayout>
-        &nbsp;
-        <Spinner />
-      </BaseLayout>
-    );
+  let transitionDelay = 0;
 
   if (typeof window !== "undefined" && loading) return null;
 
@@ -26,22 +21,36 @@ const Home = () => {
     <BaseLayout>
       {session && (
         <HomeWrapper>
-          <Title>Most recent reviews</Title>
+          <Title>
+            <motion.div
+              initial={{ opacity: 0, y: -100 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, type: "spring", stiffness: 50 }}
+            >
+              Most recent reviews
+            </motion.div>
+          </Title>
           {searchLoading && <Spinner />}
           {data &&
             data.getAllReviews.map((review) => (
               <ReviewCardWrapper key={review._id}>
-                <ReviewCard
-                  sub={review.sub}
-                  image={review.image}
-                  album={review.album}
-                  artist={review.artist}
-                  name={review.name}
-                  review={review.review}
-                  rating={review.rating}
-                  user_image={review.user_image}
-                  lastUpdated={review.lastUpdated}
-                />
+                <motion.div
+                  initial={{ opacity: 0, x: -100 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: (transitionDelay += 0.2), duration: 1.25, type: "spring", stiffness: 100 }}
+                >
+                  <ReviewCard
+                    sub={review.sub}
+                    image={review.image}
+                    album={review.album}
+                    artist={review.artist}
+                    name={review.name}
+                    review={review.review}
+                    rating={review.rating}
+                    user_image={review.user_image}
+                    lastUpdated={review.lastUpdated}
+                  />
+                </motion.div>
               </ReviewCardWrapper>
             ))}
         </HomeWrapper>
@@ -69,18 +78,6 @@ Home.getInitialProps = async (context) => {
     providers: await providers(context),
   };
 };
-
-const Title = styled.span`
-  font-size: 25px;
-  color: #fff;
-  text-transform: uppercase;
-  -webkit-letter-spacing: 0.075em;
-  -moz-letter-spacing: 0.075em;
-  -ms-letter-spacing: 0.075em;
-  letter-spacing: 0.15em;
-  font-weight: 500;
-  margin-bottom: 25px;
-`;
 
 const HomeWrapper = styled.div`
   height: 100vh;

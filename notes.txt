@@ -70,10 +70,14 @@ added faq modal - need to finish
 next/image Un-configured Host with dynamic host names is an issue 
 - use mongodb gridfs?
 
-todo: framer-motion add page animations
-todo: add some mobile responsiveness
-todo: improve typography!!!
-
-Fix issue: 
-Error: Invalid src prop (https://scontent-yyz1-1.xx.fbcdn.net/v/t1.6435-1/p320x320/122060772_3560086127348163_2012032160532304373_n.jpg?_nc_cat=102&ccb=1-3&_nc_sid=0c64ff&_nc_ohc=D0eYFBV6vzoAX-5NwtL&_nc_ht=scontent-yyz1-1.xx&oh=d3774893b0a949814facb499147f9308&oe=61285950) on `next/image`, hostname "scontent-yyz1-1.xx.fbcdn.net" is not configured under images in your `next.config.js`
+7/29/21
+framer-motion add page animations
+framer motion is super cool and easy 
+learned more about initial and server props
+flex flex flex
+fixed bug where expired tokens was not kicking user out - should add resfresh token func
+cleaned up styling and improved typography
 See more info: https://nextjs.org/docs/messages/next-image-unconfigured-host
+- Unable to fix due to dynamic hostnames from Spotify, disabling profile pic
+
+todo: added some mobile responsiveness

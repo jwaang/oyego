@@ -3,6 +3,8 @@ import Image from "next/image";
 import CreateReview from "@/components/modals/CreateReview";
 import { useState } from "react";
 import Button from "@/components/shared/Button";
+import { motion } from "framer-motion";
+import { GlassEffect } from "@/variables/shared";
 
 const SearchCard = ({ id, image, album, artist }) => {
   const [albumVariables, setAlbumVariables] = useState({});
@@ -21,7 +23,7 @@ const SearchCard = ({ id, image, album, artist }) => {
   return (
     <>
       <CreateReview onClose={() => setShowModal(false)} open={showModal} albumVariables={albumVariables} />
-      <CardWrapper>
+      <CardWrapper whileHover={{ scale: 1.05, transition: { duration: 0.25, ease: "easeInOut" } }}>
         <AlbumWrapper>
           <AlbumCoverWrapper>
             <Image src={image} alt="Album cover" layout="fill" objectFit="contain" />
@@ -36,18 +38,14 @@ const SearchCard = ({ id, image, album, artist }) => {
 };
 export default SearchCard;
 
-const CardWrapper = styled.div`
+const CardWrapper = styled(motion.div)`
   display: flex;
   flex-direction: column;
   padding: 20px;
   max-width: 140px;
   justify-content: space-between;
-
-  backdrop-filter: blur(15px) saturate(120%);
-  -webkit-backdrop-filter: blur(15px) saturate(120%);
-  background-color: rgba(255, 255, 255, 0.2);
-  border-radius: 12px;
-  border: 1px solid rgba(209, 213, 219, 0.3);
+  flex: 1;
+  ${GlassEffect}
 `;
 
 const AlbumWrapper = styled.div`
@@ -73,5 +71,3 @@ const ArtistSpan = styled.div`
   color: #495057;
   margin-bottom: 5px;
 `;
-
-const ReviewButton = styled.button``;

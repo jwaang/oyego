@@ -1,5 +1,4 @@
 import LoginCard from "@/components/cards/LoginCard";
-import Spinner from "@/components/shared/Spinner";
 import withApollo from "@/hoc/withApollo";
 import BaseLayout from "@/layouts/BaseLayout";
 import { getSession, providers, useSession } from "next-auth/client";
@@ -8,14 +7,6 @@ import styled from "styled-components";
 
 const Login = () => {
   const [session, loading] = useSession();
-
-  if (loading)
-    return (
-      <BaseLayout>
-        &nbsp;
-        <Spinner />
-      </BaseLayout>
-    );
 
   if (typeof window !== "undefined" && loading) return null;
 

@@ -5,6 +5,7 @@ import {
   CREATE_REVIEW_MUTATION,
   GET_ALL_REVIEWS_BY_EMAIL_QUERY,
   GET_ALL_REVIEWS_BY_SUB_QUERY,
+  GET_USER_PROFILE,
   EDIT_REVIEW_MUTATION,
   DELETE_REVIEW_MUTATION,
 } from "@/apollo/queries";
@@ -13,6 +14,7 @@ export const SearchAlbumsQuery = (options) => useLazyQuery(SEARCH_ALBUMS_QUERY, 
 export const GetAllReviewsByEmailQuery = (options) => useQuery(GET_ALL_REVIEWS_BY_EMAIL_QUERY, options);
 export const GetAllReviewsBySubQuery = (options) => useQuery(GET_ALL_REVIEWS_BY_SUB_QUERY, options);
 export const GetAllReviewsQuery = (options) => useQuery(GET_ALL_REVIEWS_QUERY, options);
+export const GetUserProfileQuery = (options) => useQuery(GET_USER_PROFILE, options);
 
 export const CreateReviewMutation = (options) => useMutation(CREATE_REVIEW_MUTATION, options);
 export const EditReviewMutation = (options) => useMutation(EDIT_REVIEW_MUTATION, options);

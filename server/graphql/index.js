@@ -1,6 +1,6 @@
 const { ApolloServer, gql } = require("apollo-server-express");
 const { searchQuerys, reviewMutations, reviewQuerys } = require("./resolvers");
-const { ablumSearchTypes, reviewType } = require("./types");
+const { ablumSearchTypes, reviewType, userProfileTypes } = require("./types");
 const mongoose = require("mongoose");
 
 const Review = require("./models/Review");
@@ -10,8 +10,10 @@ exports.createApolloServer = () => {
   const typeDefs = gql(`
   ${ablumSearchTypes}
   ${reviewType}
+  ${userProfileTypes}
 
   type Query {
+    getUserProfile(input: UserProfileInput): UserProfile
     searchAlbums(input: AlbumSearchInput): AlbumSearch
     getAllReviews: [Review]
     getAllReviewsByEmail(email: String): [Review]

@@ -8,6 +8,8 @@ import Link from "next/link";
 import { useState } from "react";
 import { Star } from "react-star";
 import styled from "styled-components";
+import { motion } from "framer-motion";
+import { GlassEffect } from "@/variables/shared";
 
 const ReviewCard = ({ id, sub, image, album, artist, name, review, rating, user_image, lastUpdated }) => {
   const [showEditModal, setShowEditModal] = useState(false);
@@ -25,14 +27,12 @@ const ReviewCard = ({ id, sub, image, album, artist, name, review, rating, user_
       review,
       rating,
     };
-    console.log(albumVariablesObject);
     setAlbumVariables(albumVariablesObject);
-    console.log(albumVariables);
     setShowEditModal(true);
   };
 
   return (
-    <>
+    <motion.div whileHover={{ scale: 1.05, transition: { duration: 0.25, ease: "easeInOut" } }}>
       <EditReview
         onClose={() => setShowEditModal(false)}
         open={showEditModal}
@@ -69,13 +69,13 @@ const ReviewCard = ({ id, sub, image, album, artist, name, review, rating, user_
               <Star defaultValue={rating} fraction={2} readOnly={true} shape="fat" />
               <Link href={`/user/${sub}`} passHref>
                 <UserInfo>
-                  <ProfileImageWrapper>
+                  {/* <ProfileImageWrapper>
                     <Image src={user_image} alt="User profile image" layout="fill" objectFit="contain" />
-                  </ProfileImageWrapper>
+                  </ProfileImageWrapper> */}
                   <NameSpan>{name}</NameSpan>
+                  <DateWrapper>{convertEpochToReadableDateString(lastUpdated)}</DateWrapper>
                 </UserInfo>
               </Link>
-              <DateWrapper>{convertEpochToReadableDateString(lastUpdated)}</DateWrapper>
             </UserWrapper>
           </AlbumUserWrapper>
 
@@ -109,7 +109,7 @@ const ReviewCard = ({ id, sub, image, album, artist, name, review, rating, user_
           </ReviewWrapper>
         </AlbumUserReviewWrapper>
       </CardWrapper>
-    </>
+    </motion.div>
   );
 };
 export default ReviewCard;
@@ -117,13 +117,8 @@ export default ReviewCard;
 const CardWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  padding: 20px;
-  backdrop-filter: blur(15px) saturate(120%);
-  -webkit-backdrop-filter: blur(15px) saturate(120%);
-  background-color: rgba(255, 255, 255, 0.2);
-  border-radius: 12px;
-  border: 1px solid rgba(209, 213, 219, 0.3);
   width: 500px;
+  ${GlassEffect}
 `;
 
 const AlbumUserReviewWrapper = styled.div`
@@ -186,8 +181,10 @@ const UserWrapper = styled.div`
 `;
 const UserInfo = styled.a`
   display: flex;
-  flex-direction: row;
-  align-items: center;
+  ${"" /* flex-direction: row; */}
+  ${"" /* align-items: center; */}
+  flex-direction: column;
+  align-items: flex-end;
   text-decoration: none;
 `;
 const DateWrapper = styled.div`
@@ -197,6 +194,7 @@ const DateWrapper = styled.div`
 const NameSpan = styled.span`
   font-size: 15px;
   color: #495057;
+  margin-bottom: 3px;
 `;
 const ProfileImageWrapper = styled.div`
   width: 25px;
@@ -209,4 +207,7 @@ const ProfileImageWrapper = styled.div`
 const ReviewButtonsWrapper = styled.div`
   margin-top: 10px;
   width: 100px;
+  button:first-child {
+    margin-bottom: 5px;
+  }
 `;

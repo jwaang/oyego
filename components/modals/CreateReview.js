@@ -1,6 +1,6 @@
 import { CreateReviewMutation } from "@/apollo/actions";
 import Button from "@/components/shared/Button";
-import { modalStyles } from "@/variables/shared";
+import { ModalTitle, modalStyles } from "@/variables/shared";
 import { useSession } from "next-auth/client";
 import Image from "next/image";
 import { useState } from "react";
@@ -15,7 +15,6 @@ const CreateReview = ({ open, onClose, albumVariables }) => {
   const [createReview, { loading: searchLoading, data }] = CreateReviewMutation();
 
   const saveData = () => {
-    console.log(session);
     const saveDataObject = {
       image: albumVariables.image,
       album: albumVariables.album,
@@ -27,7 +26,6 @@ const CreateReview = ({ open, onClose, albumVariables }) => {
       user_image: session.user.picture,
       sub: session.user.sub,
     };
-    console.log(saveDataObject);
     createReview({ variables: saveDataObject });
     onClose(false);
   };
@@ -35,7 +33,7 @@ const CreateReview = ({ open, onClose, albumVariables }) => {
   return (
     <>
       <Modal open={open} onClose={onClose} center styles={modalStyles}>
-        <Title>Review this album! ✍️</Title>
+        <ModalTitle>Review this album</ModalTitle>
         <CreateReviewWrapper>
           <AlbumWrapper>
             <AlbumImageWrapper>
@@ -70,15 +68,6 @@ const AlbumWrapper = styled.div`
   margin-bottom: 10px;
 `;
 
-const Title = styled.span`
-  font-size: 15px;
-  color: #fff;
-  text-transform: uppercase;
-  letter-spacing: 0.075em;
-  font-weight: 400;
-  margin-bottom: 15px;
-`;
-
 const AlbumInfoWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -101,7 +90,7 @@ const AlbumSpan = styled.span`
 
 const ArtistSpan = styled.span`
   font-size: 15px;
-  color: #495057;
+  color: #f8f9fa;
 `;
 
 const AddReviewTextArea = styled.textarea`

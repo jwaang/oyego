@@ -5,6 +5,7 @@ import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import MenuButton from "@/components/shared/MenuButton";
 import MenuTooltip from "@/components/shared/MenuTooltip";
+import { motion } from "framer-motion";
 
 const Navbar = () => {
   const [session, loading] = useSession();
@@ -32,22 +33,24 @@ const Navbar = () => {
   }, []);
 
   return (
-    <NavbarWrapper>
-      <Link href="/home" passHref>
-        <Title>Oyego</Title>
-      </Link>
-      <MenuWrapper count={1} ref={ref}>
-        <MainButtons>
-          <MenuButton href="/home" title="Home" icon={"/images/icons/home.svg"} />
-          <MenuButton href="/search" title="Search" icon={"/images/icons/search.svg"} />
-          <MenuButton href="/" title="" icon={"/images/icons/settings.svg"} onClick={(e) => handleClick(e)} />
-        </MainButtons>
-        <HamburgerWrapper>
-          <MenuButton href="/" title="" icon={"/images/icons/hamburger.svg"} onClick={(event) => handleClick(event)} />
-        </HamburgerWrapper>
-      </MenuWrapper>
-      <div ref={tooltipRef}>{session && <MenuTooltip isOpen={isOpen} sub={session.user.sub} />}</div>
-    </NavbarWrapper>
+    <motion.div initial={{ opacity: 0, y: -100 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.25, type: "spring", stiffness: 200 }}>
+      <NavbarWrapper>
+        <Link href="/home" passHref>
+          <Title>Oyego</Title>
+        </Link>
+        <MenuWrapper count={1} ref={ref}>
+          <MainButtons>
+            <MenuButton href="/home" title="Home" icon={"/images/icons/home.svg"} />
+            <MenuButton href="/search" title="Search" icon={"/images/icons/search.svg"} />
+            <MenuButton href="/" title="" icon={"/images/icons/settings.svg"} onClick={(e) => handleClick(e)} />
+          </MainButtons>
+          <HamburgerWrapper>
+            <MenuButton href="/" title="" icon={"/images/icons/hamburger.svg"} onClick={(event) => handleClick(event)} />
+          </HamburgerWrapper>
+        </MenuWrapper>
+        <div ref={tooltipRef}>{session && <MenuTooltip isOpen={isOpen} sub={session.user.sub} />}</div>
+      </NavbarWrapper>
+    </motion.div>
   );
 };
 

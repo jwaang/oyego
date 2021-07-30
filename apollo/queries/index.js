@@ -1,5 +1,13 @@
 import { gql } from "apollo-boost";
 
+export const GET_USER_PROFILE = gql`
+  query GetUserProfile($sub: String, $accessToken: String) {
+    getUserProfile(input: { sub: $sub, accessToken: $accessToken }) {
+      display_name
+    }
+  }
+`;
+
 export const SEARCH_ALBUMS_QUERY = gql`
   query SearchAlbums($artist: String, $accessToken: String, $limit: String) {
     searchAlbums(input: { artist: $artist, accessToken: $accessToken, limit: $limit }) {
@@ -65,6 +73,7 @@ export const GET_ALL_REVIEWS_BY_SUB_QUERY = gql`
       email
       name
       user_image
+      lastUpdated
     }
   }
 `;

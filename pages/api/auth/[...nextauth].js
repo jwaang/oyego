@@ -1,6 +1,7 @@
 import NextAuth from "next-auth";
 import Providers from "next-auth/providers";
 import jwt from "jsonwebtoken";
+import moment from "moment";
 const config = require("@/server/config");
 
 const options = {
@@ -36,6 +37,7 @@ const options = {
     secret: config.JWT_SECRET,
     encryption: true,
     encode: async ({ secret, token, maxAge }) => {
+      // Spotify access token expires after one hour
       const jwtClaims = {
         sub: token.sub.toString(),
         name: token.name,
@@ -43,7 +45,7 @@ const options = {
         email: token.email,
         accessToken: token.accessToken,
         iat: Date.now() / 1000,
-        exp: Math.floor(Date.now() / 1000) + 24 * 60 * 60,
+        exp: moment().add(1, "hours").unix(),
       };
       const encodedToken = jwt.sign(jwtClaims, secret, { algorithm: "HS256" });
       return encodedToken;
@@ -63,7 +65,10 @@ const options = {
     },
     async session(session, user) {
       session.user = user;
-      return session;
+      if (moment().unix() < session.user.exp) {
+        return session;
+      }
+      return null;
     },
     redirect: async (url, baseUrl) => {
       if (url === "http://localhost:3000/home") {

@@ -11,7 +11,7 @@ const InputWrapper = styled.input`
   width: 100%;
   padding: 0.5rem 1rem;
   font-size: 1rem;
-  font-weight: 400;
+  font-weight: 300;
   line-height: 1.5;
   color: #111928;
   background-color: #f3f4f6;

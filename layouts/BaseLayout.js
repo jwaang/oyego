@@ -1,7 +1,7 @@
-import styled from "styled-components";
 import WaveBackground from "@/components/backgrounds/WaveBackground";
 import Navbar from "@/components/shared/Navbar";
 import { useRouter } from "next/router";
+import styled from "styled-components";
 
 const BaseLayout = ({ children }) => {
   const router = useRouter();

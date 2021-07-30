@@ -1,6 +1,6 @@
 import { DeleteReviewMutation } from "@/apollo/actions";
 import { GET_ALL_REVIEWS_BY_SUB_QUERY } from "@/apollo/queries";
-import { modalStyles } from "@/variables/shared";
+import { ModalTitle, modalStyles } from "@/variables/shared";
 import { Modal } from "react-responsive-modal";
 import styled from "styled-components";
 import Button from "@/components/shared/Button";
@@ -34,7 +34,7 @@ const DeleteReview = ({ id, sub, open, onClose, album, artist }) => {
   return (
     <>
       <Modal open={open} onClose={onClose} center styles={modalStyles}>
-        <Title>Please confirm</Title>
+        <ModalTitle>Please confirm</ModalTitle>
         <Wrapper>
           <Body>
             Are you sure you want to delete your review of <Bold>{album}</Bold> by <Bold>{artist}</Bold>?
@@ -54,16 +54,9 @@ const Wrapper = styled.div`
   flex-direction: column;
 `;
 
-const Title = styled.div`
-  font-size: 15px;
-  color: #fff;
-  text-transform: uppercase;
-  letter-spacing: 0.075em;
-  font-weight: 400;
-  margin-bottom: 15px;
-`;
-
 const Body = styled.div`
+  font-size: 12px;
+  color: #50555b;
   margin-bottom: 15px;
 `;
 
@@ -73,6 +66,6 @@ const ButtonWrapper = styled.div`
 `;
 
 const Bold = styled.span`
-  font-weight: 500;
-  color: #fff;
+  font-weight: bold;
+  color: #f8f9fa;
 `;

@@ -1,3 +1,26 @@
+exports.userProfileTypes = `
+  input UserProfileInput {
+    sub: String
+    accessToken: String
+  }
+
+  type UserProfile {
+    display_name: String
+    external_urls: ExternalUrl
+    followers: Followers
+    href: String
+    id: String
+    images: [Image]
+    type: String
+    uri: String
+  }
+
+  type Followers {
+    href: String
+    total: Int
+  }
+`;
+
 exports.ablumSearchTypes = `
   input AlbumSearchInput {
     artist: String

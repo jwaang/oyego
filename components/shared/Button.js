@@ -30,7 +30,7 @@ const CardButton = styled.button`
     if (!size || size === "large") return "font-size: 1rem;";
     else if (size === "compact") return "font-size: .6rem;";
   }};
-  font-weight: 500;
+  font-weight: 400;
   ${({ size }) => {
     if (!size || size === "large") return "line-height: 1.5rem;";
   }};

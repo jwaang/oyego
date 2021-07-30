@@ -1,6 +1,6 @@
 import { EditReviewMutation } from "@/apollo/actions";
 import { GET_ALL_REVIEWS_BY_SUB_QUERY } from "@/apollo/queries";
-import { modalStyles } from "@/variables/shared";
+import { ModalTitle, modalStyles } from "@/variables/shared";
 import Image from "next/image";
 import { useState } from "react";
 import { Modal } from "react-responsive-modal";
@@ -26,7 +26,7 @@ const EditReview = ({ open, onClose, id, sub, image, album, rating: currentRatin
   return (
     <>
       <Modal open={open} onClose={onClose} center styles={modalStyles}>
-        <Title>Edit Review</Title>
+        <ModalTitle>Edit Review</ModalTitle>
         <EditReviewWrapper>
           <AlbumWrapper>
             <AlbumImageWrapper>
@@ -53,15 +53,6 @@ const EditReviewWrapper = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 10px;
-`;
-
-const Title = styled.span`
-  font-size: 15px;
-  color: #fff;
-  text-transform: uppercase;
-  letter-spacing: 0.075em;
-  font-weight: 400;
-  margin-bottom: 15px;
 `;
 
 const AlbumWrapper = styled.div`
