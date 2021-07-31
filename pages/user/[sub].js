@@ -7,7 +7,7 @@ import BaseLayout from "@/layouts/BaseLayout";
 import { motion } from "framer-motion";
 import { getSession, useSession } from "next-auth/client";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect } from "react";
 import styled from "styled-components";
 import { Title } from "@/variables/shared";
 
@@ -16,9 +16,13 @@ const User = ({ sessionAccessToken }) => {
   const [session, loading] = useSession();
   const { sub } = router.query;
   const { data: userProfileData } = GetUserProfileQuery({ variables: { sub, accessToken: sessionAccessToken } });
-  const { loading: searchLoading, data } = GetAllReviewsBySubQuery({ variables: { sub } });
+  const [getAllReviewsBySub, { loading: searchLoading, data }] = GetAllReviewsBySubQuery({ variables: { sub } });
   let transitionDelay = 0;
   let user = "";
+
+  useEffect(() => {
+    getAllReviewsBySub();
+  }, []);
 
   if (loading)
     return (

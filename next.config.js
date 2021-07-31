@@ -12,6 +12,9 @@ module.exports = {
     domains: ["i.scdn.co"],
   },
   env: {
+    // for auth callback
+    NEXTAUTH_URL: dev ? "http://localhost:3000" : "https://oyego.herokuapp.com/api/auth",
+    // determine uri for withApollo.js
     BASE_URL_GRAPH: dev ? "http://localhost:3000/graphql" : "https://oyego.herokuapp.com/graphql",
   },
 };

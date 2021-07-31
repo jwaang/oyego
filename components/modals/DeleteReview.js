@@ -1,24 +1,41 @@
 import { DeleteReviewMutation } from "@/apollo/actions";
-import { GET_ALL_REVIEWS_BY_SUB_QUERY } from "@/apollo/queries";
+import { GET_ALL_REVIEWS_BY_SUB_QUERY, GET_ALL_REVIEWS_QUERY } from "@/apollo/queries";
 import { ModalTitle, modalStyles } from "@/variables/shared";
 import { Modal } from "react-responsive-modal";
 import styled from "styled-components";
 import Button from "@/components/shared/Button";
+import { useRouter } from "next/router";
 
 const DeleteReview = ({ id, sub, open, onClose, album, artist }) => {
+  const router = useRouter();
+
   const [deleteReview] = DeleteReviewMutation({
     // get deleteReview which is the ObjectID
     update(cache, { data: { deleteReview } }) {
-      // fetch cache of all reviews query
-      const { getAllReviewsBySub } = cache.readQuery({ query: GET_ALL_REVIEWS_BY_SUB_QUERY, variables: { sub } });
-      // remove cached reviews by filtering out the deleteReview ObjectID
-      const updatedReviews = getAllReviewsBySub.filter((r) => r._id !== deleteReview);
-      // write back to cache with updated reviews array
-      cache.writeQuery({
-        query: GET_ALL_REVIEWS_BY_SUB_QUERY,
-        variables: { sub },
-        data: { getAllReviewsBySub: updatedReviews },
-      });
+      // Update cache for home page which uses GET_ALL_REVIEWS_QUERY
+      if (router.pathname === "/home") {
+        // fetch cache of all reviews query
+        const { getAllReviews } = cache.readQuery({ query: GET_ALL_REVIEWS_QUERY });
+        // remove cached reviews by filtering out the deleteReview ObjectID
+        const updatedReviews = getAllReviews.filter((r) => r._id !== deleteReview);
+        // write back to cache with updated reviews array
+        cache.writeQuery({
+          query: GET_ALL_REVIEWS_QUERY,
+          data: { getAllReviews: updatedReviews },
+        });
+      } else {
+        // Update cache for user profile page which uses GET_ALL_REVIEWS_BY_SUB_QUERY
+        // fetch cache of all reviews query
+        const { getAllReviewsBySub } = cache.readQuery({ query: GET_ALL_REVIEWS_BY_SUB_QUERY, variables: { sub } });
+        // remove cached reviews by filtering out the deleteReview ObjectID
+        const updatedReviews = getAllReviewsBySub.filter((r) => r._id !== deleteReview);
+        // write back to cache with updated reviews array
+        cache.writeQuery({
+          query: GET_ALL_REVIEWS_BY_SUB_QUERY,
+          variables: { sub },
+          data: { getAllReviewsBySub: updatedReviews },
+        });
+      }
     },
   });
 

@@ -80,3 +80,7 @@ cleaned up styling and improved typography
 See more info: https://nextjs.org/docs/messages/next-image-unconfigured-host
 - Unable to fix due to dynamic hostnames from Spotify, disabling profile pic
 added some mobile responsiveness
+deployment!!!! came across a ton of issues like callback url not working or graphql uri wasn't being set correctly
+
+7/31/21
+fixed bug where edit/delete reviews was not updating cache correctly

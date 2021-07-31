@@ -9,11 +9,16 @@ import React from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
 import { Title } from "@/variables/shared";
+import { useEffect } from "react";
 
 const Home = () => {
   const [session, loading] = useSession();
-  const { loading: searchLoading, data } = GetAllReviewsQuery();
+  const [getAllReviews, { loading: searchLoading, data }] = GetAllReviewsQuery();
   let transitionDelay = 0;
+
+  useEffect(() => {
+    getAllReviews();
+  }, []);
 
   if (typeof window !== "undefined" && loading) return null;
 
@@ -40,6 +45,7 @@ const Home = () => {
                   transition={{ delay: (transitionDelay += 0.2), duration: 1.25, type: "spring", stiffness: 100 }}
                 >
                   <ReviewCard
+                    id={review._id}
                     sub={review.sub}
                     image={review.image}
                     album={review.album}

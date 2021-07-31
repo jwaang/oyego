@@ -119,6 +119,10 @@ const CardWrapper = styled.div`
   flex-direction: row;
   width: 500px;
   ${GlassEffect}
+
+  @media only screen and (max-width: 450px) {
+    width: auto;
+  }
 `;
 
 const AlbumUserReviewWrapper = styled.div`

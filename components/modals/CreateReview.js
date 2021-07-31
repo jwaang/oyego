@@ -1,5 +1,6 @@
 import { CreateReviewMutation } from "@/apollo/actions";
 import Button from "@/components/shared/Button";
+import { GET_ALL_REVIEWS_BY_SUB_QUERY, GET_ALL_REVIEWS_QUERY } from "@/apollo/queries";
 import { ModalTitle, modalStyles } from "@/variables/shared";
 import { useSession } from "next-auth/client";
 import Image from "next/image";
@@ -7,12 +8,43 @@ import { useState } from "react";
 import { Modal } from "react-responsive-modal";
 import { Star } from "react-star";
 import styled from "styled-components";
+import { useRouter } from "next/router";
+import moment from "moment";
 
 const CreateReview = ({ open, onClose, albumVariables }) => {
+  const router = useRouter();
+
   const [rating, setRating] = useState(0);
   const [session, loading] = useSession();
   const [textAreaVal, setTextAreaVal] = useState("");
-  const [createReview, { loading: searchLoading, data }] = CreateReviewMutation();
+  const [createReview] = CreateReviewMutation({
+    update(cache, { data: { createReview } }) {
+      // update for home page
+      const getAllReviewsData = cache.readQuery({ query: GET_ALL_REVIEWS_QUERY });
+      if (getAllReviewsData) {
+        // only update if cache exists
+        const { getAllReviews } = getAllReviewsData;
+        const combined = [...getAllReviews, createReview];
+        cache.writeQuery({
+          query: GET_ALL_REVIEWS_QUERY,
+          data: { getAllReviews: combined },
+        });
+      }
+
+      // update for user profile page
+      const getAllReviewsBySubData = cache.readQuery({ query: GET_ALL_REVIEWS_BY_SUB_QUERY, variables: { sub: session.user.sub } });
+      if (getAllReviewsBySubData) {
+        // only update if cache exists
+        const { getAllReviewsBySub } = getAllReviewsBySubData;
+        const combined = [...getAllReviewsBySub, createReview];
+        cache.writeQuery({
+          query: GET_ALL_REVIEWS_BY_SUB_QUERY,
+          variables: { sub: session.user.sub },
+          data: { getAllReviewsBySub: combined },
+        });
+      }
+    },
+  });
 
   const saveData = () => {
     const saveDataObject = {
@@ -27,6 +59,12 @@ const CreateReview = ({ open, onClose, albumVariables }) => {
       sub: session.user.sub,
     };
     createReview({ variables: saveDataObject });
+
+    // Can also use
+    // createReview({
+    //   refetchQueries: [{ query: GET_ALL_REVIEWS_QUERY }, { query: GET_ALL_REVIEWS_BY_SUB_QUERY, variables: { sub: session.user.sub } }],
+    //   variables: saveDataObject,
+    // });
     onClose(false);
   };
 

@@ -54,6 +54,12 @@ const LoginCard = () => {
               {messages[message].value}
             </ErrorMessage>
           )}
+          <MobileMessage
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0, transition: { delay: 1.25, ease: "easeInOut", duration: 0.5 } }}
+          >
+            Please note that this application has not yet been optimized for mobile layouts.
+          </MobileMessage>
         </GlassCard>
       </motion.div>
     </Wrapper>
@@ -63,6 +69,9 @@ export default LoginCard;
 
 const Wrapper = styled.div`
   width: 400px;
+  @media only screen and (max-width: 450px) {
+    width: auto;
+  }
 `;
 
 const Me = styled.a`
@@ -95,4 +104,14 @@ const ErrorMessage = styled(motion.div)`
   margin-top: 15px;
   font-size: 12px;
   color: #e03131;
+`;
+
+const MobileMessage = styled(motion.div)`
+  display: none;
+  @media only screen and (max-width: 450px) {
+    display: block;
+    margin-top: 15px;
+    font-size: 12px;
+    color: #e03131;
+  }
 `;
