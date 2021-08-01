@@ -1,34 +1,21 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Oyego
 
-## Getting Started
+### :beginner: About
 
-First, run the development server:
+[Oyego](https://oyego.herokuapp.com/) - The social app for music lovers.
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+This is a small proof of concept inspired by Letterboxd. You can read more about my development process behind Oyego [here on dev.to](https://oyego.herokuapp.com/)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### :camera: Demo
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+[Streamable](https://streamable.com/5f5v7s)
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+### :building_construction: Built with
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+- NextJS & GraphQL
 
-## Learn More
+### :nut_and_bolt: Development Environment
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- [Spotify Developer Portal](https://developer.spotify.com/dashboard/applications)
+  - Redirect URI: http://YOUR_URL/api/auth/callback/spotify
+- View server/config/prod for environment variables to set up
