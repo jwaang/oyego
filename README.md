@@ -4,7 +4,7 @@
 
 [Oyego](https://oyego.herokuapp.com/) - The social app for music lovers.
 
-This is a small proof of concept inspired by Letterboxd. You can read more about my development process behind Oyego [here on dev.to](https://oyego.herokuapp.com/)
+This is a small proof of concept inspired by Letterboxd. You can read more about my development process behind Oyego [here on dev.to](https://dev.to/jwaang/side-project-2-oyego-190n)
 
 ### :camera: Demo
 
